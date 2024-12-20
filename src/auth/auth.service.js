@@ -17,7 +17,6 @@ export const login = async ({ loginData }) => {
         notifyOnFailed: true,
       }
     );
-    console.log(data);
     return data;
   } catch (error) {
     return errorHandler(error);
