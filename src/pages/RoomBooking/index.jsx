@@ -20,7 +20,14 @@ export default function RoomBooking() {
   const deleteModalLabels = ['paymentReference'];
   const dataTableColumns = [
     {
-      title: translate('Thông tin'),
+      title: translate('Mã'),
+      dataIndex: 'bookingReference',
+      render: (bookingReference) => {
+        return '#' + bookingReference;
+      },
+    },
+    {
+      title: translate('Tên khách'),
       dataIndex: 'fullName',
     },
     {
@@ -49,20 +56,6 @@ export default function RoomBooking() {
       dataIndex: 'numberOfPeople',
     },
     {
-      title: translate('Có thể hoàn tiền'),
-      dataIndex: 'isRefundable',
-      render: (isRefundable) => (
-        <Tag color={isRefundable ? 'green' : 'red'}>{isRefundable ? 'Có' : 'Không'}</Tag>
-      ),
-    },
-    {
-      title: translate('Có thể hủy'),
-      dataIndex: 'isCancelable',
-      render: (isCancelable) => (
-        <Tag color={isCancelable ? 'green' : 'red'}>{isCancelable ? 'Có' : 'Không'}</Tag>
-      ),
-    },
-    {
       title: translate('Trạng thái đặt'),
       dataIndex: 'bookingStatus',
       key: 'bookingStatus',
@@ -88,28 +81,30 @@ export default function RoomBooking() {
     },
     {
       title: translate('Thanh toán'),
-      dataIndex: 'refundStatus',
-      key: 'refundStatus',
-      render: (refundStatus) => {
-        const refundColors = {
+      dataIndex: 'paymentStatus',
+      key: 'paymentStatus',
+      render: (paymentStatus) => {
+        const statusColors = {
+          Failed: 'red',
           Pending: 'orange',
           Success: 'green',
-          Failed: 'red',
-          'Pending-Refund': 'blue',
-          Refunded: 'cyan',
+          Refunded: 'primary',
+          NotRefunded: 'secondary',
+          PendingRefund: 'yellow',
         };
 
-        const refundLabels = {
-          Pending: 'Chờ thanh toán',
+        const statusLabels = {
+          Pending: 'Đang chờ',
           Success: 'Đã thanh toán',
           Failed: 'Thất bại',
-          'Pending-Refund': 'Chờ hoàn tiền',
           Refunded: 'Đã hoàn tiền',
+          NotRefunded: 'Không hoàn tiền',
+          PendingRefund: 'Chờ hoàn tiền',
         };
 
         return (
-          <Tag color={refundColors[refundStatus] || 'default'}>
-            {refundLabels[refundStatus] || 'Không hoàn tiền'}
+          <Tag color={statusColors[paymentStatus] || 'default'}>
+            {statusLabels[paymentStatus] || 'Không xác định'}
           </Tag>
         );
       },

@@ -16,17 +16,17 @@ export default function RecentTable({ ...props }) {
 
   const items = [
     {
-      label: translate('Show'),
+      label: translate('Chi tiết'),
       key: 'read',
       icon: <EyeOutlined />,
     },
     {
-      label: translate('Edit'),
+      label: translate('Chỉnh sửa'),
       key: 'edit',
       icon: <EditOutlined />,
     },
     {
-      label: translate('Download'),
+      label: translate('PDF'),
       key: 'download',
       icon: <FilePdfOutlined />,
     },
@@ -37,14 +37,14 @@ export default function RecentTable({ ...props }) {
 
   const handleRead = (record) => {
     dispatch(erp.currentItem({ data: record }));
-    navigate(`/${entity}/read/${record._id}`);
+    navigate(`/${entity}/read/${record.id}`);
   };
   const handleEdit = (record) => {
     dispatch(erp.currentAction({ actionType: 'update', data: record }));
-    navigate(`/${entity}/update/${record._id}`);
+    navigate(`/${entity}/update/${record.id}`);
   };
   const handleDownload = (record) => {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record._id}.pdf`, '_blank');
+    window.open(`${DOWNLOAD_BASE_URL}${entity}/${entity}-${record.id}.pdf`, '_blank');
   };
 
   dataTableColumns = [
@@ -89,14 +89,13 @@ export default function RecentTable({ ...props }) {
   };
   const { result, isLoading, isSuccess } = useFetch(asyncList);
   const firstFiveItems = () => {
-    if (isSuccess && result) return result.slice(0, 5);
+    if (isSuccess && result) return result.pageItems.slice(0, 5);
     return [];
   };
-
   return (
     <Table
       columns={dataTableColumns}
-      rowKey={(item) => item._id}
+      rowKey={(item) => item.id}
       dataSource={isSuccess && firstFiveItems()}
       pagination={false}
       loading={isLoading}

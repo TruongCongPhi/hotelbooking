@@ -16,10 +16,27 @@ const colours = {
   purple: '#722ed1',
   expired: '#614700',
 };
+const statusTranslation = {
+  draft: 'Dự thảo',
+  sent: 'Đã gửi',
+  success: 'Thành công',
+  pending: 'Đang chờ',
+  cancelled: 'Đã hủy',
+  failed: 'Thất bại',
+  unpaid: 'Chưa thanh toán',
+  overdue: 'Quá hạn',
+  partially: 'Một phần',
+  paid: 'Đã thanh toán',
+  declined: 'Đã từ chối',
+  accepted: 'Đã chấp nhận',
+  cyan: 'Màu cyan',
+  purple: 'Màu tím',
+  expired: 'Hết hạn',
+};
 
 const defaultStatistics = [
   {
-    tag: 'draft',
+    tag: 'success',
     value: 0,
   },
   {
@@ -27,7 +44,7 @@ const defaultStatistics = [
     value: 0,
   },
   {
-    tag: 'sent',
+    tag: 'cancelled',
     value: 0,
   },
   {
@@ -44,9 +61,9 @@ const defaultStatistics = [
   },
 ];
 
-const defaultInvoiceStatistics = [
+const defaultRoomBookingStatistics = [
   {
-    tag: 'draft',
+    tag: 'success',
     value: 0,
   },
   {
@@ -54,28 +71,21 @@ const defaultInvoiceStatistics = [
     value: 0,
   },
   {
-    tag: 'overdue',
+    tag: 'cancelled',
     value: 0,
   },
   {
-    tag: 'paid',
-    value: 0,
-  },
-  {
-    tag: 'unpaid',
-    value: 0,
-  },
-  {
-    tag: 'partially',
+    tag: 'failed',
     value: 0,
   },
 ];
 
 const PreviewState = ({ tag, value }) => {
   const translate = useLanguage();
+  const displayTag = statusTranslation[tag] || tag;
   return (
     <div style={{ color: '#595959', marginBottom: 5 }}>
-      <div className="left alignLeft capitalize">{translate(tag)}</div>
+      <div className="left alignLeft capitalize">{translate(displayTag)}</div>
       <div className="right alignRight">{value} %</div>
       <Progress
         percent={value}
@@ -93,11 +103,11 @@ export default function PreviewCard({
   title = 'Preview',
   statistics = defaultStatistics,
   isLoading = false,
-  entity = 'invoice',
+  entity = 'roomBooking',
 }) {
   const statisticsMap = useMemo(() => {
-    if (entity === 'invoice') {
-      return defaultInvoiceStatistics.map((defaultStat) => {
+    if (entity === 'roomBooking') {
+      return defaultRoomBookingStatistics.map((defaultStat) => {
         const matchedStat = Array.isArray(statistics)
           ? statistics.find((stat) => stat.tag === defaultStat.tag)
           : null;
@@ -124,8 +134,8 @@ export default function PreviewCard({
       className="gutter-row"
       xs={{ span: 24 }}
       sm={{ span: 24 }}
-      md={{ span: 12 }}
-      lg={{ span: 12 }}
+      md={{ span: 24 }}
+      lg={{ span: 24 }}
     >
       <div className="pad20">
         <h3

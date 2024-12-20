@@ -57,6 +57,11 @@ export default function TourDetail({ selectedItem }) {
 
       <div style={{ padding: '20px' }}>
         <Descriptions title="Thông tin Tour" bordered>
+          <Descriptions.Item label="Trạng thái" span={3}>
+            <Tag color={isActive ? 'green' : 'red'}>
+              {isActive ? 'Đang hoạt động' : 'Không hoạt động'}
+            </Tag>
+          </Descriptions.Item>
           <Descriptions.Item label="Tên Tour" span={3}>
             {tourName || 'Không có tên'}
           </Descriptions.Item>
@@ -66,19 +71,14 @@ export default function TourDetail({ selectedItem }) {
           <Descriptions.Item label="Mô tả chi tiết" span={3}>
             {longDescription || 'Không có thông tin'}
           </Descriptions.Item>
-          <Descriptions.Item label="Thời lượng">
+          <Descriptions.Item label="Thời lượng" span={3}>
             {duration ? `${duration} giờ` : 'Không có'}
           </Descriptions.Item>
-          <Descriptions.Item label="Hiệu lực voucher">
+          <Descriptions.Item label="Hiệu lực voucher" span={3}>
             {voucherValidity || 'Không có'}
           </Descriptions.Item>
-          <Descriptions.Item label="Phương thức sử dụng">
+          <Descriptions.Item label="Phương thức sử dụng" span={3}>
             {redemptionMethod || 'Không có'}
-          </Descriptions.Item>
-          <Descriptions.Item label="Trạng thái">
-            <Tag color={isActive ? 'green' : 'red'}>
-              {isActive ? 'Đang hoạt động' : 'Không hoạt động'}
-            </Tag>
           </Descriptions.Item>
         </Descriptions>
         <Divider />

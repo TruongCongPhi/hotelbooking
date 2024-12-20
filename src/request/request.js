@@ -260,7 +260,7 @@ const request = {
         query += key + '=' + options[key] + '&';
       }
       query = query.slice(0, -1);
-      const response = await axios.get(entity + '/summary' + query);
+      const response = await axios.get(entity + query);
 
       successHandler(response, {
         notifyOnSuccess: false,

@@ -7,13 +7,13 @@ import useLanguage from '@/locale/useLanguage';
 
 import { Form, Button } from 'antd';
 
-import { login } from '@/redux/auth/actions';
+import { register } from '@/redux/auth/actions';
 import { selectAuth } from '@/redux/auth/selectors';
-import LoginForm from '@/forms/LoginForm';
+import RegisterForm from '@/forms/RegisterForm';
 import Loading from '@/components/Loading';
 import AuthModule from '@/modules/AuthModule';
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const translate = useLanguage();
   const { isLoading, isSuccess } = useSelector(selectAuth);
   const navigate = useNavigate();
@@ -21,11 +21,12 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    dispatch(login({ loginData: values }));
+    console.log(values);
+    dispatch(register({ registerData: values }));
   };
 
   useEffect(() => {
-    if (isSuccess) navigate('/');
+    if (isSuccess) navigate('/login');
   }, [isSuccess]);
 
   const FormContainer = () => {
@@ -33,32 +34,32 @@ const LoginPage = () => {
       <Loading isLoading={isLoading}>
         <Form
           layout="vertical"
-          name="normal_login"
-          className="login-form"
+          name="normal_register"
+          className="register-form"
           initialValues={{
             remember: true,
           }}
           onFinish={onFinish}
         >
-          <LoginForm />
+          <RegisterForm />
           <Form.Item>
             <Button
               type="primary"
               htmlType="submit"
-              className="login-form-button"
+              className="register-form-button"
               loading={isLoading}
               size="large"
             >
-              {translate('Đăng nhập')}
+              {translate('Đăng ký')}
             </Button>
-            Chưa có tài khoản <a href="/register">Đăng ký</a>
+            Quay lại <a href="/">Đăng nhập</a>
           </Form.Item>
         </Form>
       </Loading>
     );
   };
 
-  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Đăng nhập" />;
+  return <AuthModule authContent={<FormContainer />} AUTH_TITLE="Đăng ký" />;
 };
 
-export default LoginPage;
+export default RegisterPage;

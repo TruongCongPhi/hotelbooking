@@ -19,7 +19,7 @@ export default function CustomerPreviewCard({
           }}
         >
           <h3 style={{ color: '#333', marginBottom: 40, marginTop: 15, fontSize: 'large' }}>
-            {translate('Customers')}
+            {translate('Người dùng')}
           </h3>
 
           {isLoading ? (
@@ -32,10 +32,10 @@ export default function CustomerPreviewCard({
               }}
             >
               <Progress type="dashboard" percent={newCustomer} size={148} />
-              <p>{translate('New Customer this Month')}</p>
+              <p>{translate('Người dùng mới tháng này')}</p>
               <Divider />
               <Statistic
-                title={translate('Active Customer')}
+                title={translate('Tổng người dùng')}
                 value={activeCustomer}
                 precision={2}
                 valueStyle={
@@ -52,7 +52,6 @@ export default function CustomerPreviewCard({
                     <ArrowDownOutlined />
                   ) : null
                 }
-                suffix="%"
               />
             </div>
           )}

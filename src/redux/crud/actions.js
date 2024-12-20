@@ -83,7 +83,6 @@ export const crud = {
       }
 
       if (data.success === true) {
-        console.log('ok');
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'create',

@@ -8,8 +8,8 @@ export default function TourUpdate() {
 
   const Labels = {
     PANEL_TITLE: translate('Tour'),
-    DATATABLE_TITLE: translate('Danh sách phòng'),
-    ADD_NEW_ENTITY: translate('Thêm mới phòng'),
+    DATATABLE_TITLE: translate('Danh sách tour'),
+    ADD_NEW_ENTITY: translate('Thêm mới tour'),
     ENTITY_NAME: translate('Tour'),
   };
 
