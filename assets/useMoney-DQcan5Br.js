@@ -1,0 +1,1 @@
+import{a as t}from"./index-D6WBlErs.js";const o=()=>({formatCurrency:t.useCallback(r=>r==null?"N/A":new Intl.NumberFormat("vi-VN",{style:"currency",currency:"VND",minimumFractionDigits:0}).format(r),[])});export{o as u};
